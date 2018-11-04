@@ -256,8 +256,12 @@ public class MeetingBook implements ReadOnlyMeetingBook {
      * Sets meeting field of {@code group} in the group list to {@code meeting}.
      */
     public void setMeeting(Group group, Meeting meeting) throws GroupNotFoundException {
-        groups.setMeeting(group, meeting);
-        meetings.setMeeting(group.getMeeting(), meeting);
+        if (hasGroup(group)) {
+            groups.setMeeting(group, meeting);
+            meetings.setMeeting(group.getMeeting(), meeting);
+        } else {
+            throw new GroupNotFoundException();
+        }
     }
 
     /**
