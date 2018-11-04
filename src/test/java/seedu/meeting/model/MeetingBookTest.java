@@ -8,12 +8,16 @@ import static seedu.meeting.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.meeting.testutil.TypicalGroups.GROUP_2101;
 import static seedu.meeting.testutil.TypicalGroups.PROJECT_2103T;
 import static seedu.meeting.testutil.TypicalMeetingBook.getTypicalMeetingBook;
+import static seedu.meeting.testutil.TypicalMeetings.REHEARSAL;
 import static seedu.meeting.testutil.TypicalPersons.ALICE;
 import static seedu.meeting.testutil.TypicalPersons.BOB;
+import static seedu.meeting.testutil.TypicalMeetings.WEEKLY;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +31,7 @@ import javafx.collections.ObservableList;
 import seedu.meeting.model.group.Group;
 import seedu.meeting.model.group.exceptions.GroupNotFoundException;
 import seedu.meeting.model.meeting.Meeting;
+import seedu.meeting.model.meeting.UniqueMeetingList;
 import seedu.meeting.model.person.Name;
 import seedu.meeting.model.person.Person;
 import seedu.meeting.model.person.exceptions.DuplicatePersonException;
@@ -271,6 +276,50 @@ public class MeetingBookTest {
     public void getGroupList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         meetingBook.getGroupList().remove(0);
+    }
+
+    @Test
+    public void setMeeting_groupWithoutMeeting_returnTrue() {
+        List<Meeting> expectedMeetings = new ArrayList();
+        expectedMeetings.addAll(meetingBook.getMeetingList());
+
+        List<Group> expectedGroups = new ArrayList();
+        expectedGroups.addAll(meetingBook.getGroupList());
+
+        Group group = new GroupBuilder().withTitle("class").build();
+        meetingBook.addGroup(group);
+        meetingBook.setMeeting(group, WEEKLY);
+
+        expectedMeetings.add(WEEKLY);
+        expectedGroups.add(group);
+
+        assertEquals(expectedMeetings, meetingBook.getMeetingList());
+        assertEquals(expectedGroups, meetingBook.getGroupList());
+    }
+
+    @Test
+    public void setMeeting_groupWithMeeting_returnTrue() {
+        meetingBook.addGroup(GROUP_2101);
+
+        List<Meeting> expectedMeetings = new ArrayList();
+        expectedMeetings.addAll(meetingBook.getMeetingList());
+        expectedMeetings.remove(REHEARSAL);
+        expectedMeetings.add(WEEKLY);
+
+        List<Group> expectedGroups = new ArrayList();
+        expectedGroups.addAll(meetingBook.getGroupList());
+
+        meetingBook.setMeeting(GROUP_2101, WEEKLY);
+
+        assertEquals(expectedMeetings, meetingBook.getMeetingList());
+        assertEquals(expectedGroups, meetingBook.getGroupList());
+    }
+
+    @Test
+    public void setMeeting_noGroup_throwsGroupNotFoundExeception() {
+        thrown.expect(GroupNotFoundException.class);
+        Group group = new GroupBuilder().withTitle("class").build();
+        meetingBook.setMeeting(group, WEEKLY);
     }
 
     /**
