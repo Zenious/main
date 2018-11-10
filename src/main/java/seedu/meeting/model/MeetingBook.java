@@ -257,8 +257,9 @@ public class MeetingBook implements ReadOnlyMeetingBook {
      */
     public void setMeeting(Group group, Meeting meeting) throws GroupNotFoundException {
         if (hasGroup(group)) {
+            Meeting toReplace = group.getMeeting();
             groups.setMeeting(group, meeting);
-            meetings.setMeeting(group.getMeeting(), meeting);
+            meetings.setMeeting(toReplace, meeting);
         } else {
             throw new GroupNotFoundException();
         }
