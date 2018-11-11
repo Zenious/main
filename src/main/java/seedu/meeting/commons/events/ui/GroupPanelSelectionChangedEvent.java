@@ -3,9 +3,9 @@ package seedu.meeting.commons.events.ui;
 import seedu.meeting.commons.events.BaseEvent;
 import seedu.meeting.model.group.Group;
 
+// @@author jeffreyooi
 /**
  * Represents a selection change in the Group List Panel
- * {@author jeffreyooi}
  */
 public class GroupPanelSelectionChangedEvent extends BaseEvent {
 

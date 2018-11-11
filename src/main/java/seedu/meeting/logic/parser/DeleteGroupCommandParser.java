@@ -2,6 +2,7 @@ package seedu.meeting.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.meeting.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.meeting.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.meeting.logic.commands.DeleteGroupCommand;
 import seedu.meeting.logic.parser.exceptions.ParseException;
@@ -22,14 +23,15 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
      */
     public DeleteGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        try {
-            Title title = ParserUtil.parseTitle(args);
-            Group group = new Group(title);
-            return new DeleteGroupCommand(group);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE), pe);
+        if (!argMultimap.areAllPrefixesPresent(PREFIX_NAME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE));
         }
+
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_NAME).get());
+        Group group = new Group(title);
+        return new DeleteGroupCommand(group);
     }
 }

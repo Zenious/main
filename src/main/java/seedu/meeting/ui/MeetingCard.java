@@ -6,9 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.meeting.model.meeting.Meeting;
 
+// @@author jeffreyooi
 /**
  * An UI component that displays information of a {@code Meeting}
- * {@author jeffreyooi}
  */
 public class MeetingCard extends UiPart<Region> {
 

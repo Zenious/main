@@ -12,6 +12,8 @@ import static seedu.meeting.testutil.TypicalPersons.BENSON;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -179,7 +181,10 @@ public class ModelManagerTest {
         modelManager.addGroup(editedGroup);
         modelManager.cancelMeeting(editedGroup);
 
-        assertFalse(editedGroup.hasMeeting());
+        List<Group> listWithMeetings =
+            modelManager.getGroupList().stream().filter(Group::hasMeeting).collect(Collectors.toList());
+        assertTrue(listWithMeetings.isEmpty());
+        assertTrue(modelManager.getFilteredMeetingList().isEmpty());
     }
 
     @Test

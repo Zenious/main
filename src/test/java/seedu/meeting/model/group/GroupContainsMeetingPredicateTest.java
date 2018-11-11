@@ -15,9 +15,9 @@ import org.junit.Test;
 
 import seedu.meeting.model.group.util.GroupContainsMeetingPredicate;
 
+// @@author jeffreyooi
 /**
  * Tests that a {@code Group}'s {@code Title} matches any of the keywords given.
- * {@author jeffreyooi}
  */
 public class GroupContainsMeetingPredicateTest {
     @Test

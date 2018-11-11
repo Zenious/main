@@ -27,9 +27,7 @@ import seedu.meeting.logic.parser.exceptions.ParseException;
 import seedu.meeting.model.meeting.TimeStamp;
 import seedu.meeting.model.person.Email;
 import seedu.meeting.model.person.Name;
-import seedu.meeting.model.person.Person;
 import seedu.meeting.model.person.Phone;
-import seedu.meeting.model.person.UniquePersonList;
 import seedu.meeting.model.person.util.PersonPropertyComparator;
 import seedu.meeting.model.shared.Address;
 import seedu.meeting.model.shared.Description;
@@ -208,17 +206,6 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
-    }
-
-    /**
-     * Parses {@code Iterable<Person> members} into a {@code UniquePersonList}.
-     */
-    public static UniquePersonList parseMember(Iterable<Person> members) throws ParseException {
-        requireNonNull(members);
-        final UniquePersonList parseList = new UniquePersonList();
-        members.forEach(parseList::add);
-
-        return parseList;
     }
 
     // @@author

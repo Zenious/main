@@ -125,6 +125,18 @@ public class Group {
         this.members.setPersons(members);
     }
 
+    // @@author jeffreyooi
+    /**
+     * Copy constructor
+     */
+    public Group(Group toCopy) {
+        this.title = toCopy.getTitle();
+        this.description = Optional.ofNullable(toCopy.getDescription());
+        this.meeting = Optional.ofNullable(toCopy.getMeeting());
+        this.members = new UniquePersonList();
+        this.members.setPersons(toCopy.getMembers());
+    }
+    // @@author
 
     public Title getTitle() {
         return title;
@@ -215,6 +227,17 @@ public class Group {
 
         toRemove.removeGroupHelper(this);
     }
+
+    // @@author zenious
+    /**
+     * Remove a person from this group that is not in groups yet.
+     *
+     */
+    public void removeMemberNoGroups(Person toRemove) {
+        requireNonNull(toRemove);
+        this.members.remove(toRemove);
+    }
+    // @@author
 
     /**
      * This method is reserved to be called only from {@link seedu.meeting.model.person.Person#removeGroup(Group)}

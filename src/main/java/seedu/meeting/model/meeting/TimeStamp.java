@@ -85,6 +85,6 @@ public class TimeStamp implements Comparable<TimeStamp> {
 
     @Override
     public String toString() {
-        return date + "-" + month.getValue() + "-" + year.getValue() + "@" + hour + ":" + minute;
+        return String.format("%d-%d-%d@%02d:%02d", date, month.getValue(), year.getValue(), hour, minute);
     }
 }

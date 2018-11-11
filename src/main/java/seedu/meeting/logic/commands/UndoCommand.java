@@ -1,6 +1,8 @@
 package seedu.meeting.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.meeting.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+import static seedu.meeting.model.Model.PREDICATE_SHOW_ALL_MEETINGS;
 import static seedu.meeting.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.meeting.logic.CommandHistory;
@@ -26,6 +28,8 @@ public class UndoCommand extends Command {
 
         model.undoMeetingBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -7,9 +7,9 @@ import seedu.meeting.model.MeetingBook;
 import seedu.meeting.model.group.Group;
 import seedu.meeting.model.person.Person;
 
+// @@author jeffreyooi
 /**
  * A utility class that returns a typical {@code MeetingBook} object to be used in tests.
- * {@author jeffreyooi}
  */
 public class TypicalMeetingBook {
     /**

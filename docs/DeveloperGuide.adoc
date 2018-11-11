@@ -203,7 +203,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 .Structure of the Model Component
 image::updatedModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/meeting/model/Model.java[`Model.java`]
+*API* : link:https://github.com/CS2103-AY1819S1-W17-3/main/blob/master/src/main/java/seedu/meeting/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -313,7 +313,7 @@ The `UniqueGroupList`,
 * exposes an unmodifiable `ObservableList<Group>` for observation of the list.
 
 [NOTE]
-Both `UniqueGroupList` and `UniquePersonList` implements `Iterable` interface.
+Both `UniqueGroupList`, `UniquePersonList` and `UniqueMeetingList` implements `Iterable` interface.
 // end::uniqueGroupList[]
 
 // tag::addgroup/deletegroup[]
@@ -497,7 +497,7 @@ image::cancelCommandSequenceDiagram.png[width="300"]
 ** Cons: This design causes the command syntax to become unnatural, and makes the program more suspectible to errors.
 // end::meeting[]
 
-// tag::addressbook[]
+// tag::meetingbook[]
 === MeetingBook feature
 
 ==== Current Implementation
@@ -515,7 +515,7 @@ image::addressbookObject.png[width="350"]
 
 [NOTE]
 The categorisation of `Person` is not exclusive. One `Person` can be enrolled in multiple groups at the same time.
-// end::addressbook[]
+// end::meetingbook[]
 
 // tag::sortfind[]
 === Sort and Find feature
@@ -643,44 +643,108 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::select[]
 === Select feature
+
+The select command selects the `GroupCard`, `MeetingCard` or `PersonCard` in the `ObservableList<Group>`, `ObservableList<Meeting>`,
+or `ObservableList<Person>` respectively in `Model` that is bounded to the UI. This section will explain current implementation
+of select command, execution sequence, and design considerations of multiple implementations.
+
 ==== Current Implementation
 
 The select mechanism is facilitated by `ModelManager`.
-It extends `Model` with two lists, `UniquePersonList` and `UniqueGroupList` and implements the following operations:
+It extends `Model` with three lists, `UniquePersonList`, `UniqueMeetingList` and `UniqueGroupList` and implements the following operations:
 
 * `Model#updateFilteredPersonList` -- Updates person list with a specific `Predicate`.
+* `Model#updateFilteredGroupList` -- Updates group list with specific `Predicate`.
+* `Model#updateFilteredMeetingList` -- Updates meeting list with specific `Predicate`.
 
 Given below is an example usage scenario and how the select mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
-The `ModelManager` will be initialized with the initial MeetingBook state, and both `UniquePersonList` and `UniqueGroupList` contains all person and group without filter.
+The `ModelManager` will be initialized with the initial MeetingBook state, and `UniquePersonList`, `UniqueMeetingList` and `UniqueGroupList` contains all person, meetings and groups respectively without filter.
 
-Step 2. The user executes `select g/1` command to select the 1st group in the MeetingBook.
-The `SelectCommandParser` parses the command to determine the select type, and the command calls executes the following steps:
+Step 2. The user executes `select` command to select the item type with the specified index in the MeetingBook.
+The `SelectCommandParser` parses the command to determine the select type, and the command executes the following steps:
 
-* Step 2.1. If the select type is `SELECT_TYPE_GROUP`, a `JumpToGroupListRequestEvent` is sent to update the UI to select the group card,
-and `Model#updateFilteredPersonList` is called to filter `UniquePersonList` to contain only person that are associated with the group.
+* Step 2.1. If the prefix is `g/`, a `JumpToGroupListRequestEvent` is sent to update the UI to select the group card,
+`Model#updateFilteredPersonList` is called to filter `UniquePersonList` to contain only person that are associated with the group,
+and `Model#updateFilteredMeetingList` is called to filter `UniqueMeetingList` to show only meeting that is associated with the group.
 
-* Step 2.2. If the select type is `SELECT_TYPE_PERSON`, a `JumpToListRequestEvent` is sent to the UI to select the person card.
+* Step 2.2. If the prefix is `m/`, a `JumpToMeetingListRequestEvent` is sent to the UI to select the meeting card.
+
+* Step 2.3. If the prefix is `p/`, a `JumpToListRequestEvent` is sent to the UI to select the person card.
 
 [NOTE]
-If a group is selected, calling `select` command with `SELECT_TYPE_PERSON` will only select the person in the filtered `UniquePersonList` that contains only person in the selected group.
+If a group is selected, subsequent `select` calls to person and meeting list will only select the person or meeting in the filtered
+`UniquePersonList` or `UniqueMeetingList` respectively.
 
-The following activity diagram summarizes what happens when a user executes a `select` command:
+.Select group sequence diagram when user executes select group 1
+image::SelectGroupSequenceDiagram.png[width="800"]
 
-image::SelectActivityDiagram.png[width="650"]
+.Select command activity diagram
+image::SelectActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: How select executes
+===== Aspect: Data structure to support the select command
 
-* **Alternative 1 (current choice):** Use prefix to differentiate between selecting group or person.
-** Pros: Easy to implement.
-** Cons: Select command becomes too generalized.
-* **Alternative 2:** Individual command for selecting group and person.
-** Pros: Structurally correct as each command is specialized to executing a specific task.
+* **Alternative 1 (current choice):** Use a single select class to perform all select operations.
+** Pros: Easy to implement as there are fewer lines of code required.
+** Cons: Harder to extend if need to implement select command for other items, select class will become bloated if too
+many items require select command.
+* **Alternative 2:** Abstract select class containing required variables and methods without implementation, and select
+commands inherit from the abstract class and implement the execution functionality.
+** Pros: Good data structure, easy to extend functionality to select other items.
 ** Cons: Requires more code to implement.
 // end::select[]
+
+// tag::list[]
+=== List feature
+
+The `list` command removes any filters applied to `UniqueGroupList`, `UniquePersonList` and `UniqueMeetingList` by other
+commands. This section will explain current implementation of list command and design considerations during development
+phase.
+
+==== Current implementation
+The list mechanism is facilitated by `ModelManager`. It uses the same operations as mentioned in `select` feature,
+namely `Model#updateFilteredPersonList`, `Model#updateFilteredGroupList` and `Model#updateFilteredMeetingList`.
+
+Given below is an example usage scenario and operations executed by list mechanism at each step.
+
+Step 1. The user launches the application. `ModelManager` will be initialized with initial MeetingBook state, and
+`UniquePersonList`, `UniqueMeetingList` and `UniqueGroupList` contains all person, meetings and groups respectively
+without filter.
+
+Step 2. The user executes `list` command with additional parameter to specify the list to show all items. Available
+parameters are `person`, `meeting` and `group`, or their shorthand equivalent `p`, `m` and `g`. `ListCommandParser`
+parses the command to determine the list type, and the command executes the following steps:
+
+* Step 2.1. If the parameter is `group` / `g`, `Model#updateFilteredGroupList` is called with
+`PREDICATE_SHOW_ALL_GROUPS` to remove any filters applied to `UniqueGroupList`.
+
+* Step 2.1. If the parameter is `meeting` / `m`, `Model#updateFilteredMeetingList` is called with
+`PREDICATE_SHOW_ALL_MEETINGS` to remove any filters applied to `UniqueMeetingList`.
+
+* Step 2.1. If the parameter is `person` / `p`, `Model#updateFilteredPersonList` is called with
+`PREDICATE_SHOW_ALL_PERSONS` to remove any filters applied to `UniquePersonList`.
+
+[NOTE]
+List will remain unchanged if it does not have any filters applied before executing `list` command.
+
+.List group sequence diagram
+image::ListCommandSequenceDiagram.png[width="800"]
+
+==== Design considerations
+===== Aspect: Data structure to support the list command
+* **Alternative 1 (current choice)** : Use a single list class to perform all list operations.
+** Pros: Easy to implement as fewer lines of code are required.
+** Cons: Harder to extend list functionality if need to implement list command for other items, list class will become
+bloated if too many items require list command.
+* **Alternative 2** : Abstract list class containing required variables and methods without implementation, and specific
+list commands inherit from the abstract class and implement the execution functionality.
+** Pros: Good data structure, easy to extend functionality to other items that require list command.
+** Cons: Requires more lines of code to implement.
+
+// end::list[]
 
 // tag::export[]
 === Export feature

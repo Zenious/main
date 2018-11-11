@@ -80,11 +80,11 @@ public class AddCommandSystemTest extends MeetingBookSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the MeetingBook except phone and email
-         * -> added
+         * -> failure
          */
         toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
-        assertCommandSuccess(command, toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add to empty MeetingBook -> added */
         deleteAllPersons();

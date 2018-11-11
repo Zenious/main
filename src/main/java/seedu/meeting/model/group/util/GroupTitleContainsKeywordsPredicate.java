@@ -6,9 +6,9 @@ import java.util.function.Function;
 import seedu.meeting.model.group.Group;
 import seedu.meeting.model.util.EntityContainsKeywordsPredicate;
 
+// @@author jeffreyooi
 /**
  * Tests that a {@code Group}'s {@code Title} matches any of the keywords given.
- * {@author jeffreyooi}
  */
 public class GroupTitleContainsKeywordsPredicate extends EntityContainsKeywordsPredicate<Group> {
     private static final Function<Group, String> groupTitleGetter = group -> group.getTitle().fullTitle;

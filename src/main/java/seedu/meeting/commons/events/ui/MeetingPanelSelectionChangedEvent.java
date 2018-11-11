@@ -3,9 +3,9 @@ package seedu.meeting.commons.events.ui;
 import seedu.meeting.commons.events.BaseEvent;
 import seedu.meeting.model.meeting.Meeting;
 
+// @@author jeffreyooi
 /**
  * Represents a selection change in the {@code MeetingListPanel}
- * {@author jeffreyooi}
  */
 public class MeetingPanelSelectionChangedEvent extends BaseEvent {
 

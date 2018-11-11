@@ -1,0 +1,61 @@
+= Koh Zheng Wei - Project Portfolio
+:sectnums:
+:sectnumlevels: 5
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:repoURL: https://github.com/CS2103-AY1819S1-W17-3/main
+
+
+Here you can find details on my contributions to various Software Engineering projects.
+
+== PROJECT: MeetingBook
+
+MeetingBook is a desktop scheduler application targeted at university students involved in multiple Co-Curricular Activities and Project-Based modules. The application is a modified contact book with features to group contacts and assign meetings to such groups. MeetingBook is written by a team of 5 students from National University of Singapore's School of Computing. It is forked from https://github.com/nus-cs2103-AY1819S1/addressbook-level4[AddressBook-Level4] written by https://se-edu.github.io/[SE-EDU].
+//<Project Constraints><Purpose><Personalise><Summarise of contribution (My contribution includes)>
+
+=== Summary of contributions
+
+* *Major enhancement*: added the ability to *export/import MeetingBook*
+** What it does: allows the user to export/import XML version of MeetingBook.
+** Justification: allows the user to port over existing data of MeetingBook to other devices. This ensure that when the user change his device, he will not lose all information that stored in MeetingBook and is able to continue using MeetingBook without much disruption.
+** Highlights: requires clear understanding to the underlying mechanism on how the Storage component works and being used in MeetingBook. User can decide between different conflict resolution behaviors to resolve merging conflict occurs when importing MeetingBook.
+
+* *Minor enhancement*: Implementation of `filepath` command . This allow user of MeetingBook to view or change the storage location of MeetingBook.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zenious[code]]
+* *Other contributions*:
+
+** Project management:
+*** Setting up project management tools such as Coveralls, Travis, Codacy for the team repository
+*** Managed releases v1.1 - v1.3.1 (5 releases) on GitHub
+
+** Enhancements to existing features:
+*** refactoring of Address Book to MeetingBoo: https://github.com/CS2103-AY1819S1-W17-3/main/pull/157[#157]
+** Documentation:
+*** Updated User Guide and Developer Guide: https://github.com/CS2103-AY1819S1-W17-3/main/pull/36[#36], https://github.com/CS2103-AY1819S1-W17-3/main/pull/56[#56], https://github.com/CS2103-AY1819S1-W17-3/main/pull/94[#94], https://github.com/CS2103-AY1819S1-W17-3/main/pull/141[#141], https://github.com/CS2103-AY1819S1-W17-3/main/pull/160[#160]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W17-3/main/pull/29[#29]
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=export]
+
+include::../UserGuide.adoc[tag=filepath]
+
+include::../UserGuide.adoc[tag=import]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=export]
+
+include::../DeveloperGuide.adoc[tag=import]

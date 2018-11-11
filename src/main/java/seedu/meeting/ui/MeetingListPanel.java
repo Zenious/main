@@ -15,9 +15,9 @@ import seedu.meeting.commons.events.ui.JumpToMeetingListRequestEvent;
 import seedu.meeting.commons.events.ui.MeetingPanelSelectionChangedEvent;
 import seedu.meeting.model.meeting.Meeting;
 
+// @@author jeffreyooi
 /**
  * Panel containing the list of meetings.
- * {@author jeffreyooi}
  */
 public class MeetingListPanel extends UiPart<Region> {
     private static final String FXML = "MeetingListPanel.fxml";

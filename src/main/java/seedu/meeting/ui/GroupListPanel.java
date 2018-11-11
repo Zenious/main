@@ -13,11 +13,12 @@ import javafx.scene.layout.Region;
 import seedu.meeting.commons.core.LogsCenter;
 import seedu.meeting.commons.events.ui.GroupPanelSelectionChangedEvent;
 import seedu.meeting.commons.events.ui.JumpToGroupListRequestEvent;
+import seedu.meeting.commons.events.ui.RefreshGroupListEvent;
 import seedu.meeting.model.group.Group;
 
+// @@author jeffreyooi
 /**
  * Panel containing the list of groups.
- * {@author jeffreyooi}
  */
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";
@@ -62,6 +63,11 @@ public class GroupListPanel extends UiPart<Region> {
     private void handleJumpToListRequestEvent(JumpToGroupListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
+    }
+
+    @Subscribe
+    private void forceListRefresh(RefreshGroupListEvent event) {
+        groupListView.refresh();
     }
 
     /**

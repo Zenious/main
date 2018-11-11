@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 import seedu.meeting.model.group.Group;
 import seedu.meeting.model.person.Person;
 
+// @@author jeffreyooi
 /**
  * Tests that a {@code Person}'s {@code Group} matches any of the keywords given.
- * {@author jeffreyooi}
  */
 public class GroupContainsPersonPredicate implements Predicate<Person> {
     private final List<Group> groups;

@@ -3,9 +3,9 @@ package seedu.meeting.commons.events.ui;
 import seedu.meeting.commons.core.index.Index;
 import seedu.meeting.commons.events.BaseEvent;
 
+// @@author jeffreyooi
 /**
  * Indicates a request to jump to the list of meetings.
- * {@author jeffreyooi}
  */
 public class JumpToMeetingListRequestEvent extends BaseEvent {
 

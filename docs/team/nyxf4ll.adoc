@@ -21,7 +21,7 @@ MeetingBook is a desktop scheduler application targeted at university students i
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=nyxf4ll&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[code]]
 
 * *Other contributions*:
 

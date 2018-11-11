@@ -18,7 +18,7 @@ import seedu.meeting.model.shared.Address;
 import seedu.meeting.model.shared.Title;
 import seedu.meeting.model.tag.Tag;
 
-
+// @@author Derek-Hardy
 /**
  * Parses input arguments and creates a new JoinCommand object
  */

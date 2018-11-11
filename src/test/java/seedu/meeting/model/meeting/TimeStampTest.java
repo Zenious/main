@@ -200,10 +200,10 @@ public class TimeStampTest {
 
         // 1 January 1, 00:00 -> 1-1-1@0:0
         time = new TimeStamp(Year.of(1), Month.JANUARY, 1, 0, 0);
-        Assert.assertEquals("1-1-1@0:0", time.toString());
+        Assert.assertEquals("1-1-1@00:00", time.toString());
 
         //21 December 2012, 1:23 AM -> 21-12-2012@1:23
         time = new TimeStamp(Year.of(2012), Month.DECEMBER, 21, 1, 23);
-        Assert.assertEquals("21-12-2012@1:23", time.toString());
+        Assert.assertEquals("21-12-2012@01:23", time.toString());
     }
 }

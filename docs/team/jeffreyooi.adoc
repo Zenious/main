@@ -1,7 +1,9 @@
 = Ooi Heng Seng - Project Portfolio
-:imagesDir: images
-:stylesDir: stylesheets
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 :repoURL: https://github.com/CS2103-AY1819S1-W17-3/main
+
+== Introduction
 
 Welcome to my project portfolio! I am Ooi Heng Seng, a year 3 Computer Science student in National University of Singapore.
 
@@ -24,7 +26,7 @@ in Java, and has about 10kLoC.
 
 * How it looks like:
 +
-image::Ui.png[width="800"]
+image::Ui.png[width="600"]
 +
 * What it does: allows the user to view all information at a glance.
 * Justification: the updated user interface improves the user experience significantly because it reduces the amount of
@@ -33,9 +35,11 @@ interaction to look for the information.
 interface elements. It requires user to enter additional parameter to commands mentioned.
 * Credits: JavaFX
 
-- Minor enhancement:
+- Major enhancement: updated the select command
 * Updated select command to select between groups, meetings or persons. Select groups will filter meeting and person
 lists to show only relevant information of the group.
+
+- Minor enhancement:
 * Updated list command to show all groups, meetings or persons.
 
 - Code contributed: -- To be added --
@@ -158,29 +162,59 @@ The `UI` component,
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 === Select feature
+
+The select command selects the `GroupCard`, `MeetingCard` or `PersonCard` in the `ObservableList<Group>`, `ObservableList<Meeting>`,
+or `ObservableList<Person>` respectively in `Model` that is bounded to the UI. This section will explain current implementation
+of select command, execution sequence, and design considerations of multiple implementations.
+
 ==== Current Implementation
 
 The select mechanism is facilitated by `ModelManager`.
-It extends `Model` with two lists, `UniquePersonList` and `UniqueGroupList` and implements the following operations:
+It extends `Model` with three lists, `UniquePersonList`, `UniqueMeetingList` and `UniqueGroupList` and implements the following operations:
 
 * `Model#updateFilteredPersonList` -- Updates person list with a specific `Predicate`.
+* `Model#updateFilteredGroupList` -- Updates group list with specific `Predicate`.
+* `Model#updateFilteredMeetingList` -- Updates meeting list with specific `Predicate`.
 
 Given below is an example usage scenario and how the select mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
-The `ModelManager` will be initialized with the initial address book state, and both `UniquePersonList` and `UniqueGroupList` contains all person and group without filter.
+The `ModelManager` will be initialized with the initial MeetingBook state, and `UniquePersonList`, `UniqueMeetingList` and `UniqueGroupList` contains all person, meetings and groups respectively without filter.
 
-Step 2. The user executes `select g/1` command to select the 1st group in the address book.
+Step 2. The user executes `select` command to select the item type with the specified index in the MeetingBook.
 The `SelectCommandParser` parses the command to determine the select type, and the command calls executes the following steps:
 
 * Step 2.1. If the select type is `SELECT_TYPE_GROUP`, a `JumpToGroupListRequestEvent` is sent to update the UI to select the group card,
-and `Model#updateFilteredPersonList` is called to filter `UniquePersonList` to contain only person that are associated with the group.
+`Model#updateFilteredPersonList` is called to filter `UniquePersonList` to contain only person that are associated with the group,
+and `Model#updateFilteredMeetingList` is called to filter `UniqueMeetingList` to show only meeting that is associated with the group.
 
-* Step 2.2. If the select type is `SELECT_TYPE_PERSON`, a `JumpToListRequestEvent` is sent to the UI to select the person card.
+* Step 2.2. If the select type is `SELECT_TYPE_MEETING`, a `JumpToMeetingListRequestEvent` is sent to the UI to select the meeting card.
+
+* Step 2.3. If the select type is `SELECT_TYPE_PERSON`, a `JumpToListRequestEvent` is sent to the UI to select the person card.
 
 [NOTE]
-If a group is selected, calling `select` command with `SELECT_TYPE_PERSON` will only select the person in the filtered `UniquePersonList` that contains only person in the selected group.
+If a group is selected, subsequent `select` calls to person and meeting list will only select the person or meeting in the filtered
+`UniquePersonList` or `UniqueMeetingList` respectively.
 
-The following activity diagram summarizes what happens when a user executes a `select` command:
+.Select group sequence diagram when user executes select group 1
+image::SelectGroupSequenceDiagram.png[width="800"]
 
-image::SelectActivityDiagram.png[width="650"]
+.Select command activity diagram
+image::SelectActivityDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Data structure to support the select command
+
+* **Alternative 1 (current choice):** Use prefix to differentiate between selecting group, meeting or person, and use a
+single select class to perform all select operations.
+** Pros: Easy to implement as there are fewer lines of code required.
+** Cons: Harder to extend if need to implement select command for other items, select class will become bloated if too
+many items require select command.
+* **Alternative 2:** Individual command for selecting group, meeting and person.
+** Pros: Easy to extend functionality to select other items as all select commands are independent.
+** Cons: Requires more code to implement.
+* **Alternative 3:** Abstract select class containing required variables and methods without implementation, and select
+commands inherit from the abstract class and implement the execution functionality.
+** Pros: Good data structure.
+** Cons: Requires more code to implement.

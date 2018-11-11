@@ -11,6 +11,7 @@ import seedu.meeting.commons.core.index.Index;
 import seedu.meeting.logic.commands.SelectCommand;
 import seedu.meeting.logic.parser.exceptions.ParseException;
 
+// @@author jeffreyooi
 /**
  * Parses input arguments and creates a new SelectCommand object
  */

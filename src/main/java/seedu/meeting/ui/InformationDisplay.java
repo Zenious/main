@@ -9,9 +9,9 @@ import javafx.scene.layout.StackPane;
 import seedu.meeting.commons.core.LogsCenter;
 import seedu.meeting.logic.Logic;
 
+// @@author jeffreyooi
 /**
  * The UI component that displays information of groups, meetings and persons in 3 horizontal panes.
- * {@author jeffreyooi}
  */
 public class InformationDisplay extends UiPart<Region> {
 

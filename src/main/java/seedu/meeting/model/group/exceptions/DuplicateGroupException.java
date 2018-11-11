@@ -1,5 +1,6 @@
 package seedu.meeting.model.group.exceptions;
 
+// @@author Derek-Hardy
 /**
  * Signals that the operation will result in duplicate Groups
  * (Groups are considered duplicates if they have the same identity).

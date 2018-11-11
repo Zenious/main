@@ -7,6 +7,7 @@ import seedu.meeting.logic.commands.AddGroupCommand;
 import seedu.meeting.logic.commands.DeleteGroupCommand;
 import seedu.meeting.model.group.Group;
 
+// @@author Derek-Hardy
 /**
  * A utility class for Group.
  */
@@ -40,7 +41,7 @@ public class GroupUtil {
      */
     public static String getDeleteGroupAsName(Group group) {
         StringBuilder sb = new StringBuilder();
-        sb.append(group.getTitle().fullTitle + " ");
+        sb.append(PREFIX_NAME + group.getTitle().fullTitle + " ");
         return sb.toString();
     }
 

@@ -16,6 +16,7 @@ import seedu.meeting.model.shared.Title;
  * {@author Derek-Hardy}
  * {@author NyxF4ll}
  */
+// @@author Derek-Hardy
 public class Meeting implements Comparable<Meeting> {
 
     // Identity fields
@@ -76,6 +77,7 @@ public class Meeting implements Comparable<Meeting> {
                 && otherMeeting.getTime().equals(getTime())
                 && otherMeeting.getLocation().equals(getLocation());
     }
+    // @@author
 
     // @@author NyxF4ll
     /**
@@ -87,6 +89,7 @@ public class Meeting implements Comparable<Meeting> {
     }
     // @@author
 
+    // @@author Derek-Hardy
     /**
      * Returns true if both meetings have the same identity and data fields.
      * This defines a stronger notion of equality between two meetings.
@@ -127,4 +130,5 @@ public class Meeting implements Comparable<Meeting> {
 
         return builder.toString();
     }
+    // @@author
 }

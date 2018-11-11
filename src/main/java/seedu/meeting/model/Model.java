@@ -60,6 +60,7 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    // @@author Derek-Hardy
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the MeetingBook.
@@ -73,7 +74,7 @@ public interface Model {
      * The group identity of {@code editedGroup} must not be the same as another existing group in the MeetingBook.
      */
     void updateGroup(Group target, Group editedGroup) throws GroupNotFoundException;
-
+    // @@author
     // @@author Derek-Hardy
     /**
      * Add a group object {@code group} to the MeetingBook.

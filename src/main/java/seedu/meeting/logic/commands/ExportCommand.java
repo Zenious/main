@@ -20,7 +20,7 @@ public class ExportCommand extends Command {
             + "Parameters: "
             + PREFIX_PATH + "FilePath\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PATH + "backup";
+            + PREFIX_PATH + "backup.xml";
 
     private Path filepath;
 

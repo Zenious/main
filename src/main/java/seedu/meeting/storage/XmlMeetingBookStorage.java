@@ -14,6 +14,9 @@ import seedu.meeting.commons.exceptions.DataConversionException;
 import seedu.meeting.commons.exceptions.IllegalValueException;
 import seedu.meeting.commons.util.FileUtil;
 import seedu.meeting.model.ReadOnlyMeetingBook;
+import seedu.meeting.model.group.exceptions.GroupNotFoundException;
+import seedu.meeting.model.meeting.exceptions.MeetingNotFoundException;
+import seedu.meeting.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A class to access MeetingBook data stored as an xml file on the hard disk.
@@ -57,6 +60,15 @@ public class XmlMeetingBookStorage implements MeetingBookStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
+        } catch (PersonNotFoundException pnfe) {
+            logger.info("Incorrectly Formatted Person Found in XML File");
+            throw new DataConversionException(pnfe);
+        } catch (GroupNotFoundException gnfe) {
+            logger.info("Incorrectly Formatted Group Found in XML File");
+            throw new DataConversionException(gnfe);
+        } catch (MeetingNotFoundException mnfe) {
+            logger.info("Incorrectly Formatted Meeting Found in XML File");
+            throw new DataConversionException(mnfe);
         }
     }
 

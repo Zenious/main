@@ -16,7 +16,7 @@ import seedu.meeting.model.person.Person;
 import seedu.meeting.model.shared.Title;
 
 
-
+// @@author Derek-Hardy
 /**
  * Join a person into a group existed in the MeetingBook.
  */

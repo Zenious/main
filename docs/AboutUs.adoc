@@ -33,7 +33,7 @@ Responsibilities: UI
 
 === Koh Zheng Wei
 image::zenious.png[width="150", align="left"]
-{empty}[http://github.com/Zenious[github]]
+{empty}[http://github.com/Zenious[github]][<<zenious#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Storage

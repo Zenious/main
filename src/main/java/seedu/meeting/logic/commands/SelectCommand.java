@@ -23,6 +23,7 @@ import seedu.meeting.model.group.util.GroupContainsPersonPredicate;
 import seedu.meeting.model.meeting.Meeting;
 import seedu.meeting.model.person.Person;
 
+// @@author jeffreyooi
 /**
  * Selects a person identified using it's displayed index from the MeetingBook.
  */

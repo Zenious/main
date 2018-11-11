@@ -304,8 +304,10 @@ public class MeetingBookTest {
         expectedMeetings.remove(REHEARSAL);
         expectedMeetings.add(WEEKLY);
 
-        List<Group> expectedGroups = new ArrayList();
-        expectedGroups.addAll(meetingBook.getGroupList());
+        Group editedGroup = GROUP_2101;
+        editedGroup.setMeeting(WEEKLY);
+        List<Group> expectedGroups = new ArrayList<>();
+        expectedGroups.add(editedGroup);
 
         meetingBook.setMeeting(GROUP_2101, WEEKLY);
 

@@ -103,6 +103,7 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    // @@author Derek-Hardy
     /**
      * Find an existing person that matches the given {@code name}.
      * If the person is found, returns the matched person. Else returns {@code null}.
@@ -119,6 +120,7 @@ public class UniquePersonList implements Iterable<Person> {
         // if no match is found, returns null
         return null;
     }
+    // @@author
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

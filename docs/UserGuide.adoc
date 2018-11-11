@@ -346,6 +346,7 @@ image::importSuccessfulOutput.png[width="450"]
 === Exporting data : `export`
 
 User is able to export data to store as backup elsewhere or send data to other users of MeetingBook. +
+A XML file containing MeetingBook data will be created at the filepath indicated by the user.
 
 Format: `export  f/FILEPATH` +
 // Future implementation
@@ -358,8 +359,6 @@ Example: +
 The image below shows the result after successfully executing the command.
 
 image::exportSuccessfulOutput.png[width="450"]
-
-
 
 // end::export[]
 
@@ -383,7 +382,6 @@ The image below shows the result after successfully executing the command.
 image::filepath--showOutput.png[width="450"]
 ****
 
-// end::filepath[]
 
 === Saving the data
 

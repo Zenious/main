@@ -2,6 +2,7 @@ package seedu.meeting.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.meeting.commons.core.Messages.MESSAGE_GROUP_NOT_FOUND;
+import static seedu.meeting.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.meeting.logic.CommandHistory;
 import seedu.meeting.logic.commands.exceptions.CommandException;
@@ -19,9 +20,11 @@ public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "deleteGroup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the group identified by the title used in the displayed group list.\n"
-            + "Parameters: title (must be a valid title)\n"
-            + "Example: " + COMMAND_WORD + " CS2103T";
+            + ": Deletes the group identified by the title from MeetingBook.\n"
+            + "Parameter: "
+            + PREFIX_NAME + "TITLE\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "CS2103T";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
 

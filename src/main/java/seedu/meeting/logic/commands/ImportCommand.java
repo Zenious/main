@@ -22,16 +22,16 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String OPTION_OVERWRITE = "--force";
     public static final String MESSAGE_SUCCESS = "%s have been imported into MeetingBook.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import XML File to Meetingbook. Default behaviour "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Import XML File to MeetingBook. Default behaviour "
             + "is to ignore any conflicting Person/Group entries unless "
             + OPTION_OVERWRITE + " is provided.\n"
             + "Parameters: [Options] "
             + PREFIX_PATH + "FilePath\n"
             + "Options: "
-            + OPTION_OVERWRITE + " overwrite any conflicting Person/Group +"
+            + OPTION_OVERWRITE + " overwrite any conflicting Person/Group \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PATH + "backup\n"
-            + COMMAND_WORD + " " + OPTION_OVERWRITE + PREFIX_PATH + "backup";
+            + COMMAND_WORD + " " + OPTION_OVERWRITE + " " + PREFIX_PATH + "backup";
     public static final String MESSAGE_FAIL_DATA = "Data file provided is not in the correct format. ";
     public static final String MESSAGE_FAIL_NOFILE = "File does not exists.";
 
