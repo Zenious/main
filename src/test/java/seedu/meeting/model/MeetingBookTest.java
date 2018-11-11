@@ -9,15 +9,14 @@ import static seedu.meeting.testutil.TypicalGroups.GROUP_2101;
 import static seedu.meeting.testutil.TypicalGroups.PROJECT_2103T;
 import static seedu.meeting.testutil.TypicalMeetingBook.getTypicalMeetingBook;
 import static seedu.meeting.testutil.TypicalMeetings.REHEARSAL;
+import static seedu.meeting.testutil.TypicalMeetings.WEEKLY;
 import static seedu.meeting.testutil.TypicalPersons.ALICE;
 import static seedu.meeting.testutil.TypicalPersons.BOB;
-import static seedu.meeting.testutil.TypicalMeetings.WEEKLY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,6 @@ import javafx.collections.ObservableList;
 import seedu.meeting.model.group.Group;
 import seedu.meeting.model.group.exceptions.GroupNotFoundException;
 import seedu.meeting.model.meeting.Meeting;
-import seedu.meeting.model.meeting.UniqueMeetingList;
 import seedu.meeting.model.person.Name;
 import seedu.meeting.model.person.Person;
 import seedu.meeting.model.person.exceptions.DuplicatePersonException;
